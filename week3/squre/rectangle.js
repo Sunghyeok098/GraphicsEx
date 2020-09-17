@@ -14,7 +14,6 @@ window.onload = function init() {
     vec2(-0.5, -0.5),
     vec2(0.5, 0.5),
     vec2(0.5, -0.5),
-    //vec2(1.0, 0),
     vec2(0.5, 0.5),
     vec2(-0.5, -0.5)
   ];
@@ -28,7 +27,7 @@ window.onload = function init() {
 
 
 
-  var bufferId = gl.createBuffer();
+  var bufferId = gl.createBuffer(); //gpu에 보낼 object를 만든다.
   gl.bindBuffer(gl.ARRAY_BUFFER, bufferId);
   gl.bufferData(gl.ARRAY_BUFFER, flatten(vertices), gl.STATIC_DRAW);
 
@@ -38,10 +37,17 @@ window.onload = function init() {
   gl.vertexAttribPointer(vPosition, 2, gl.FLOAT, false, 0, 0); 
   gl.enableVertexAttribArray(vPosition);
 
+  var uOffset = gl.getUniformLocation(program, "uOffset");
+  gl.uniform4fv(uOffset, [1, 0, 0, 0]);
+
+  var uColor = gl.getUniformLocation(program, "uColor");
+  gl.uniform4fv(uColor, [1, 0, 0, 1]);
+
+
   render();
 };
 
 function render() {
   gl.clear(gl.COLOR_BUFFER_BIT);
-  gl.drawArrays(gl.TRIANGLE_FAN, 0, 5);
+  gl.drawArrays(gl.TRIANGLES, 0, 6);
 }
