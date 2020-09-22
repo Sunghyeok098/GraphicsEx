@@ -26,6 +26,9 @@ window.onload = function init() {
   gl.enableVertexAttribArray(vPosition);
 
   var uColor = gl.getUniformLocation(program, "uColor");
+  var uOffset = gl.getUniformLocation(program, "uOffset");
+
+  
 
   gl.clear(gl.COLOR_BUFFER_BIT);
 
@@ -61,6 +64,7 @@ window.onload = function init() {
 
   gl.bufferData(gl.ARRAY_BUFFER, flatten(body), gl.STATIC_DRAW);
   gl.uniform4fv(uColor, [0.5, 0.25, 0, 1]);
+  gl.uniform4fv(uOffset, [1, 0, 0, 0]);
   var first = 0;
   var last = 6;
   render(first, last);

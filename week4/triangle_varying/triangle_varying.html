@@ -5,16 +5,16 @@
 <script id="vertex-shader" type="x-shader/x-vertex">
 
 attribute vec4 vPosition;  
-uniform vec4 uOffset;
-varying vec4 fColor;
 attribute vec4 vColor;
+varying vec4 fColor;
+
 
 void 
 main() {
 
     fColor = vColor;
-    gl_Position = vPosition + uOffset;
-    
+    gl_Position = vPosition;
+
 }
 
     
@@ -22,35 +22,23 @@ main() {
 
 <script id="fragment-shader" type="x-shader/x-fragment">
 precision mediump float;
-uniform vec4 uColor;
 varying vec4 fColor;
+
+
 void
 main()
 {
 
-    gl_FragColor = uColor;
-
-}
-</script>
-
-<script id="fragment-shader1" type="x-shader/x-fragment">
-precision mediump float;
-varying vec4 fColor;
-    
-void
-main()
-{
-    
     //gl_FragColor = uColor;
     gl_FragColor = fColor;
-    
+
 }
 </script>
 
 <script type="text/javascript" src="../../Common/webgl-utils.js"></script>
 <script type="text/javascript" src="../../Common/InitShaders.js"></script>
 <script type="text/javascript" src="../../Common/MV.js"></script>
-<script type="text/javascript" src="hw1.js"></script>
+<script type="text/javascript" src="triangle_varying.js"></script>
 </head>
 
 <body>
