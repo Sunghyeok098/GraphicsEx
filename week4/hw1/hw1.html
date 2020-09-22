@@ -21,9 +21,9 @@ main() {
 </script>
 
 <script id="fragment-shader" type="x-shader/x-fragment">
+//using uniform
 precision mediump float;
 uniform vec4 uColor;
-varying vec4 fColor;
 void
 main()
 {
@@ -34,14 +34,12 @@ main()
 </script>
 
 <script id="fragment-shader1" type="x-shader/x-fragment">
+//useing varying
 precision mediump float;
-varying vec4 fColor;
-    
+varying vec4 fColor; 
 void
 main()
-{
-    
-    //gl_FragColor = uColor;
+{ 
     gl_FragColor = fColor;
     
 }
