@@ -51,6 +51,80 @@ window.onload = function init() {
   
   render2(0, 9); //render
 
+  //star vertex definition
+  var star = [
+    vec2(-0.84, 0.70),
+    vec2(-0.81, 0.76),
+
+    vec2(-0.84, 0.76),
+    vec2(-0.81, 0.70),
+
+    vec2(-0.8, 0.73),
+    vec2(-0.85, 0.73),    
+  ];
+  
+ 
+  var bufferId = gl.createBuffer(); //create buffer object
+  gl.bindBuffer(gl.ARRAY_BUFFER, bufferId);
+  gl.bufferData(gl.ARRAY_BUFFER, flatten(star), gl.STATIC_DRAW);
+
+  var vPosition = gl.getAttribLocation(program, "vPosition");
+  gl.vertexAttribPointer(vPosition, 2, gl.FLOAT, false, 0, 0); 
+  gl.enableVertexAttribArray(vPosition);
+
+  var uOffset = gl.getUniformLocation(program, "uOffset"); //load offset
+  gl.uniform4fv(uOffset, [0.0, 0.0, 0, 0]); //move vertex with offset
+
+  var uColor = gl.getUniformLocation(program, "uColor"); //load color
+  gl.uniform4fv(uColor, [1, 1, 0, 1]); //set vertex color
+  
+  for(var i=0;i<=4;i+=2){
+    render3(i, i+2); //render
+  }
+
+
+  var uOffset = gl.getUniformLocation(program, "uOffset"); //load offset
+  gl.uniform4fv(uOffset, [0.05, 0.05, 0, 0]); //move vertex with offset
+
+  for(var i=0;i<=4;i+=2){
+    render3(i, i+2); //render
+  }
+
+  var uOffset = gl.getUniformLocation(program, "uOffset"); //load offset
+  gl.uniform4fv(uOffset, [-0.05, 0.05, 0, 0]); //move vertex with offset
+
+  for(var i=0;i<=4;i+=2){
+    render3(i, i+2); //render
+  }
+
+  var uOffset = gl.getUniformLocation(program, "uOffset"); //load offset
+  gl.uniform4fv(uOffset, [0, 0.1, 0, 0]); //move vertex with offset
+  
+  for(var i=0;i<=4;i+=2){
+    render3(i, i+2); //render
+  }
+
+  var uOffset = gl.getUniformLocation(program, "uOffset"); //load offset
+  gl.uniform4fv(uOffset, [0.0, -0.1, 0, 0]); //move vertex with offset
+  
+  for(var i=0;i<=4;i+=2){
+    render3(i, i+2); //render
+  }
+
+  var uOffset = gl.getUniformLocation(program, "uOffset"); //load offset
+  gl.uniform4fv(uOffset, [0, -0.2, 0, 0]); //move vertex with offset
+  
+  for(var i=0;i<=4;i+=2){
+    render3(i, i+2); //render
+  }
+
+  var uOffset = gl.getUniformLocation(program, "uOffset"); //load offset
+  gl.uniform4fv(uOffset, [-0.075, -0.25, 0, 0]); //move vertex with offset
+  
+  for(var i=0;i<=4;i+=2){
+    render3(i, i+2); //render
+  }
+
   
   //home vertex definition
   var home = [
@@ -170,39 +244,10 @@ window.onload = function init() {
   
   render(0,3);   //render
 
-   //mountain vertex definition
-  var mount = [
-    vec2(-0.35, 0.3),
-    vec2(0.7, 0.35),
-    vec2(0.2, 0.95),
-  ];
-
-  //each mountain vertex definition
-  var mount_color = [
-    vec4(0.0, 1.0, 0.0, 1.0),
-    vec4(0.0, 1.0, 0.0, 1.0),
-    vec4(1.0, 1.0, 1.0, 1.0)
-  ];
-
-
-  var bufferId = gl.createBuffer();   //create buffer object
-  gl.bindBuffer(gl.ARRAY_BUFFER, bufferId);
-  gl.bufferData(gl.ARRAY_BUFFER, flatten(mount), gl.STATIC_DRAW);
-
-  var vPosition = gl.getAttribLocation(program2, "vPosition");
-  gl.vertexAttribPointer(vPosition, 2, gl.FLOAT, false, 0, 0); 
-  gl.enableVertexAttribArray(vPosition);
+   
 
   var uOffset = gl.getUniformLocation(program2, "uOffset");  //load offset
-  gl.uniform4fv(uOffset, [-0.1, -0.15, 0, 0]);  //move vertex with offset
-
-  var vertexColorBufferID = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, vertexColorBufferID);
-  gl.bufferData(gl.ARRAY_BUFFER, flatten(mount_color), gl.STATIC_DRAW);
-
-  var vColor = gl.getAttribLocation(program2, "vColor");  //load vColor
-  gl.vertexAttribPointer(vColor, 4, gl.FLOAT, false, 0, 0);
-  gl.enableVertexAttribArray(vColor);
+  gl.uniform4fv(uOffset, [0.5, 0.07, 0, 0]);  //move vertex with offset
 
   render(0,3);//render
 
@@ -393,7 +438,7 @@ window.onload = function init() {
   gl.uniform4fv(uOffset, [0, 0, 0, 0]);//move vertex with offset
 
   var uColor = gl.getUniformLocation(program, "uColor");  //load color
-  gl.uniform4fv(uColor, [0.5, 0.5, 0.5, 1]);  //set vertex color
+  gl.uniform4fv(uColor, [0.6, 0.3, 0, 1]);  //set vertex color
 
   render(0,6);  //render
 
