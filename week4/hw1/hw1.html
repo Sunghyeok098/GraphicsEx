@@ -13,7 +13,7 @@ void
 main() {
 
     fColor = vColor;
-    gl_Position = vPosition + uOffset;
+    gl_Position = vPosition + uOffset; //move offset
     
 }
 
@@ -28,19 +28,20 @@ void
 main()
 {
 
-    gl_FragColor = uColor;
+    gl_FragColor = uColor; //set color
 
 }
 </script>
 
 <script id="fragment-shader1" type="x-shader/x-fragment">
-//useing varying
+//using varying
+
 precision mediump float;
 varying vec4 fColor; 
 void
 main()
 { 
-    gl_FragColor = fColor;
+    gl_FragColor = fColor; //set color
     
 }
 </script>

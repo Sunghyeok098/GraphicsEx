@@ -371,6 +371,32 @@ window.onload = function init() {
 
   render(0,6);  //render
 
+  //land vertex definition
+  var land = [
+    vec2(-1, -1),
+    vec2(-1, -0.95),
+    vec2(1, -0.7),
+    vec2(-1, -1),
+    vec2(1, -0.7),
+    vec2(1, -1)   
+  ]; 
+
+  var bufferId = gl.createBuffer(); //gpu에 보낼 object를 만든다.
+  gl.bindBuffer(gl.ARRAY_BUFFER, bufferId);
+  gl.bufferData(gl.ARRAY_BUFFER, flatten(land), gl.STATIC_DRAW);
+
+  var vPosition = gl.getAttribLocation(program, "vPosition");
+  gl.vertexAttribPointer(vPosition, 2, gl.FLOAT, false, 0, 0); 
+  gl.enableVertexAttribArray(vPosition);
+
+  var uOffset = gl.getUniformLocation(program, "uOffset");  //load offset
+  gl.uniform4fv(uOffset, [0, 0, 0, 0]);//move vertex with offset
+
+  var uColor = gl.getUniformLocation(program, "uColor");  //load color
+  gl.uniform4fv(uColor, [0.5, 0.5, 0.5, 1]);  //set vertex color
+
+  render(0,6);  //render
+
   //grass vertex definition
   var grass = [
     vec2(0, -0.9),
@@ -477,6 +503,9 @@ window.onload = function init() {
   gl.uniform4fv(uColor, [0, 1, 0.8, 1]);  //set vertex color
 
   render3(0,6);  //render
+
+
+  
 
 
 };
