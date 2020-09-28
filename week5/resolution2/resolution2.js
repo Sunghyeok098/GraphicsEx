@@ -11,16 +11,19 @@ window.onload = function init() {
 
 
   gl.viewport(0, 0, canvas.width, canvas.height); 
-  gl.clearColor(0.0, 0.0, 0.0, 1.0); 
+  gl.clearColor(1.0, 1.0, 1.0, 1.0); 
 
 
   var program = initShaders(gl, "vertex-shader", "fragment-shader");
   gl.useProgram(program);
 
 
-  var vertices = new Float32Array([
-    10, 20, 80, 20, 10, 30, 10, 30, 80, 20, 80, 30,
-  ]);
+  var vertices = [
+   vec2(-0.5, -0.5),
+   vec2(-0.5, 0.5),
+   vec2(0.5, 0.5),
+   vec2(0.5, -0.5),
+  ];
 
 
   var bufferId = gl.createBuffer(); //gpu에 보낼 object를 만든다.
@@ -28,11 +31,6 @@ window.onload = function init() {
   gl.bufferData(gl.ARRAY_BUFFER, flatten(vertices), gl.STATIC_DRAW);
 
   var vPosition = gl.getAttribLocation(program, "vPosition");
-  var size = 2;
-  var type = gl.FLOAT;
-  var normalize = false;
-  var stride = 0;
-  var offset = 0;
   gl.vertexAttribPointer(vPosition, 2, gl.FLOAT, false, 0, 0); 
   gl.enableVertexAttribArray(vPosition);
 
@@ -41,14 +39,34 @@ window.onload = function init() {
   // set the resolution
   gl.uniform2f(vResolution, gl.canvas.width, gl.canvas.height);
 
-  
+  var fColor = gl.getUniformLocation(program, "fColor");
 
-  render();
+  for(var i=0;i<50;++i){
+
+    setRectangle(gl, randomInt(300), randomInt(300), randomInt(300), randomInt(300));
+    gl.uniform4f(fColor, Math.random(), Math.random(), Math.random(), 1);
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+  }
+
 
 
 };
 
-function render() {
-  gl.clear(gl.COLOR_BUFFER_BIT);
-  gl.drawArrays(gl.TRIANGLES, 0, 6);
+function randomInt(range){
+
+  return Math.floor(Math.random()*range);
 }
+
+function setRectangle(gl, x, y, width, height){
+
+  var x1 = x;
+  var x2 = x + width;
+  var y1 = y;
+  var y2 = y + height;
+  
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+    x1,y1,x2,y1,x1,y2,x1,y2,x2,y1,x2,y2
+
+  ]), gl.STATIC_DRAW)
+}
+
