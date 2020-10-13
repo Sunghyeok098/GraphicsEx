@@ -93,7 +93,6 @@ window.onload = function init() {
 
   var vColor = gl.getAttribLocation(program, "vColor");
   gl.vertexAttribPointer(vColor, 4, gl.FLOAT, false, 0, 0);
-  
   gl.enableVertexAttribArray(vColor);
 
   render(0,3);
@@ -117,7 +116,7 @@ window.onload = function init() {
   gl.disableVertexAttribArray(vColor);
   
 
-  gl.vertexAttrib4f(vColor, 1.0, 1.0, 0.0, 1.0);
+  //gl.vertexAttrib4f(vColor, 1.0, 1.0, 0.0, 1.0);
   render2(0,11);
   
   gl.vertexAttrib4f(vColor, 0.0, 0.0, 0.0, 1.0);

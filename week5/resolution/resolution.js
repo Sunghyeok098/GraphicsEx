@@ -19,7 +19,12 @@ window.onload = function init() {
 
 
   var vertices = new Float32Array([
-    10, 20, 80, 20, 10, 30, 10, 30, 80, 20, 80, 30,
+    10, 20, 
+    80, 20, 
+    10, 30, 
+    10, 30, 
+    80, 20, 
+    80, 30,
   ]);
 
 
@@ -33,7 +38,7 @@ window.onload = function init() {
   var normalize = false;
   var stride = 0;
   var offset = 0;
-  gl.vertexAttribPointer(vPosition, 2, gl.FLOAT, false, 0, 0); 
+  gl.vertexAttribPointer(vPosition, 2, gl.FLOAT, false, 0, 0.5); 
   gl.enableVertexAttribArray(vPosition);
 
   // we added a uniform called vResolution.

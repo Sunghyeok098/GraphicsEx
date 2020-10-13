@@ -1,6 +1,6 @@
 var gl;
 var points = [];
-var NumTimesToSubdivide = 10;
+var NumTimesToSubdivide = 2;
 
 window.onload = function init() {
   var canvas = document.getElementById("gl-canvas");
@@ -59,6 +59,8 @@ function triangle(a, b, c){
 
 function divideTriangle(a, b, c, count){
 
+  console.log(points);
+
   if ( count == 0 ) {
     triangle( a, b, c);
   }
@@ -72,8 +74,9 @@ function divideTriangle(a, b, c, count){
     count--;
     // three new triangles
     divideTriangle(a, ab, ac, count);
-    divideTriangle(c, ac, bc, count);
     divideTriangle(b, bc, ab, count);
+    divideTriangle(c, ac, bc, count);
+    
   }
   
 }
