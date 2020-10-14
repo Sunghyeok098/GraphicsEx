@@ -21,7 +21,7 @@ window.onload = function init()
 {
     var canvas = document.getElementById( "gl-canvas" );
 
-    gl = canvas.getContext( "webgl", { antialias: false, preserveDrawingBuffer: true} );
+    gl = canvas.getContext( "webgl", { antialias: false, preserveDrawingBuffer: true} ); //set no delete before primitive
     gl = WebGLUtils.setupWebGL( canvas );
     if ( !gl ) { alert( "WebGL isn't available" ); }
 
@@ -787,16 +787,10 @@ window.onload = function init()
     gl.drawArrays( gl.LINES, 0, 36);
 
 
+    
     gl.useProgram(program1);
 
-    
-
     canvas.addEventListener('mousedown', function(event){
-
-      
-
-      //gl.bindBuffer(gl.ARRAY_BUFFER, draw_Buffer);
-      //var t = vec2(2*event.clientX/canvas.width-1, 2*(canvas.height-event.clientY)/canvas.height-1);
 
       var cx = 2*event.clientX/canvas.width-1;
       var cy = 2*(canvas.height-event.clientY)/canvas.height-1;
@@ -822,55 +816,48 @@ window.onload = function init()
       var t3_v3_x = cx + 0.02;
       var t3_v3_y = cy - 0.03;
      
-     
 
+      //define star vertex
       var t = [
         t1_v1_x, t1_v1_y, t1_v2_x, t1_v2_y, t1_v3_x, t1_v3_y,
         t2_v1_x, t2_v1_y, t2_v2_x, t2_v2_y, t2_v3_x, t2_v3_y,
         t3_v1_x, t3_v1_y, t3_v2_x, t3_v2_y, t3_v3_x, t3_v3_y
       
       ];
+     
+      index+=9; //vertex 9
 
-      console.log(t);
-      //gl.bufferSubData(gl.ARRAY_BUFFER, 8*index, flatten(t));
-      //gl.bindBuffer(gl.ARRAY_BUFFER, cBuffer);
-      //t = vec4(colors[(index)%7]);
-      var color = vec4(1.0, 1.0, 0.0, 1.0);
-      console.log(color);
-      //gl.bufferSubData(gl.ARRAY_BUFFER, 16*index, flatten(t));
-      index+=9; 
-      
+      var color = vec4(1.0, 1.0, 0.0, 1.0); //set color
+
       var draw_Buffer = gl.createBuffer();
       gl.bindBuffer( gl.ARRAY_BUFFER, draw_Buffer);
       gl.bufferData( gl.ARRAY_BUFFER, flatten(t), gl.STATIC_DRAW );
 
-    // Associate out shader variables with our data buffer
-    var vPosition = gl.getAttribLocation( program1, "vPosition" );
-    gl.vertexAttribPointer( vPosition, 2, gl.FLOAT, false, 0, 0 );
-    gl.enableVertexAttribArray( vPosition );
+      // Associate out shader variables with our data buffer
+      var vPosition = gl.getAttribLocation( program1, "vPosition" );
+      gl.vertexAttribPointer( vPosition, 2, gl.FLOAT, false, 0, 0 );
+      gl.enableVertexAttribArray( vPosition );
 
-    var cBuffer = gl.createBuffer();
-    gl.bindBuffer( gl.ARRAY_BUFFER, cBuffer);
-    gl.bufferData( gl.ARRAY_BUFFER, flatten(color), gl.STATIC_DRAW );
+      var cBuffer = gl.createBuffer();
+      gl.bindBuffer( gl.ARRAY_BUFFER, cBuffer);
+      gl.bufferData( gl.ARRAY_BUFFER, flatten(color), gl.STATIC_DRAW );
 
-    // Associate out shader variables with our data buffer
-    var vColor = gl.getAttribLocation( program1, "vColor" );
-    gl.vertexAttribPointer( vColor, 4, gl.FLOAT, false, 0, 0 );
-    gl.disableVertexAttribArray(vColor);
-    gl.vertexAttrib4f(vColor, 1.0, 1.0, 0.0, 1.0);
+      // Associate out shader variables with our data buffer
+      var vColor = gl.getAttribLocation( program1, "vColor" );
+      gl.vertexAttribPointer( vColor, 4, gl.FLOAT, false, 0, 0 );
+      gl.disableVertexAttribArray(vColor);
+      gl.vertexAttrib4f(vColor, 1.0, 1.0, 0.0, 1.0);
     
 
     render();
       
   });
-  //gl.drawArrays( gl.LINES, 0, index);
-  //window.requestAnimationFrame(render());
+
 	
 };
 
 function render() {
 
-	//gl.clear( gl.COLOR_BUFFER_BIT );
 	gl.drawArrays( gl.TRIANGLES, 0, index);
 	window.requestAnimationFrame(render);
 }
