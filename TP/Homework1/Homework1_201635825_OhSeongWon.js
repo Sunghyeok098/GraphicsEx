@@ -21,6 +21,7 @@ window.onload = function init()
 {
     var canvas = document.getElementById( "gl-canvas" );
 
+    gl = canvas.getContext( "webgl", { antialias: false, preserveDrawingBuffer: true} );
     gl = WebGLUtils.setupWebGL( canvas );
     if ( !gl ) { alert( "WebGL isn't available" ); }
 
@@ -800,10 +801,35 @@ window.onload = function init()
       var cx = 2*event.clientX/canvas.width-1;
       var cy = 2*(canvas.height-event.clientY)/canvas.height-1;
 
-      var cx_1 = cx + 0.1;
-      var cy_1 = cy + 0.1;
+      var t1_v1_x = cx - 0.025;
+      var t1_v1_y = cy + 0.01;
+      var t1_v2_x = cx;
+      var t1_v2_y = cy - 0.01;
+      var t1_v3_x = cx + 0.025;
+      var t1_v3_y = cy + 0.01;
 
-      var t = [cx, cy, cx_1, cy_1];
+      var t2_v1_x = cx - 0.02;
+      var t2_v1_y = cy - 0.03;
+      var t2_v2_x = cx;
+      var t2_v2_y = cy + 0.03;
+      var t2_v3_x = cx;
+      var t2_v3_y = cy - 0.01;
+
+      var t3_v1_x = cx ;
+      var t3_v1_y = cy + 0.03;
+      var t3_v2_x = cx ;
+      var t3_v2_y = cy - 0.01;
+      var t3_v3_x = cx + 0.02;
+      var t3_v3_y = cy - 0.03;
+     
+     
+
+      var t = [
+        t1_v1_x, t1_v1_y, t1_v2_x, t1_v2_y, t1_v3_x, t1_v3_y,
+        t2_v1_x, t2_v1_y, t2_v2_x, t2_v2_y, t2_v3_x, t2_v3_y,
+        t3_v1_x, t3_v1_y, t3_v2_x, t3_v2_y, t3_v3_x, t3_v3_y
+      
+      ];
 
       console.log(t);
       //gl.bufferSubData(gl.ARRAY_BUFFER, 8*index, flatten(t));
@@ -812,7 +838,7 @@ window.onload = function init()
       var color = vec4(1.0, 1.0, 0.0, 1.0);
       console.log(color);
       //gl.bufferSubData(gl.ARRAY_BUFFER, 16*index, flatten(t));
-      index+=2; 
+      index+=9; 
       
       var draw_Buffer = gl.createBuffer();
       gl.bindBuffer( gl.ARRAY_BUFFER, draw_Buffer);
@@ -830,7 +856,9 @@ window.onload = function init()
     // Associate out shader variables with our data buffer
     var vColor = gl.getAttribLocation( program1, "vColor" );
     gl.vertexAttribPointer( vColor, 4, gl.FLOAT, false, 0, 0 );
-    gl.enableVertexAttribArray( vColor);
+    gl.disableVertexAttribArray(vColor);
+    gl.vertexAttrib4f(vColor, 1.0, 1.0, 0.0, 1.0);
+    
 
     render();
       
@@ -843,6 +871,6 @@ window.onload = function init()
 function render() {
 
 	//gl.clear( gl.COLOR_BUFFER_BIT );
-	gl.drawArrays( gl.LINES, 0, index);
+	gl.drawArrays( gl.TRIANGLES, 0, index);
 	window.requestAnimationFrame(render);
 }
