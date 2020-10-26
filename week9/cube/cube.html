@@ -7,9 +7,8 @@ attribute  vec4 vColor;
 varying vec4 fColor;
 
 uniform vec3 theta;
-uniform float time;
 
-void main()
+void main() 
 {
     // Compute the sines and cosines of theta for each of
     //   the three axes in one computation.
@@ -18,11 +17,6 @@ void main()
     vec3 s = sin( angles );
 
     // Remeber: thse matrices are column-major
-    mat4 sxyz = mat4( 0.5,  0.0,  0.0, 0.0,
-		    0.0,  0.5,  0.0, 0.0,
-		    0.0, 0.0,  0.5, 0.0,
-            0.0,  0.0,  0.0, 1.0 );
-            
     mat4 rx = mat4( 1.0,  0.0,  0.0, 0.0,
 		    0.0,  c.x,  s.x, 0.0,
 		    0.0, -s.x,  c.x, 0.0,
@@ -40,15 +34,14 @@ void main()
 		    0.0,  0.0, 0.0, 1.0 );
 
     fColor = vColor;
-    gl_Position = sxyz * rz * ry * rx * vPosition;
-    
-}
+    gl_Position = rz * ry * rx * vPosition;
+} 
 </script>
 
 <script id="fragment-shader" type="x-shader/x-fragment">
 
 precision mediump float;
-
+   
 varying vec4 fColor;
 
 void
@@ -61,23 +54,21 @@ main()
 <script type="text/javascript" src="../../Common/webgl-utils.js"></script>
 <script type="text/javascript" src="../../Common/initShaders.js"></script>
 <script type="text/javascript" src="../../Common/MV.js"></script>
-<script type="text/javascript" src="cube_scale.js"></script>
+<script type="text/javascript" src="cube.js"></script>
 
 <body>
 
-
-
-
+<p>ID : 201534103 Name : 하성혁</p>
 <canvas id="gl-canvas" width="512"" height="512">
 Oops ... your browser doesn't support the HTML5 canvas element
 </canvas>
-
+   
 <br/>
 
 <button id= "xButton">Rotate X</button>
 <button id= "yButton">Rotate Y</button>
 <button id= "zButton">Rotate Z</button>
-<button id= "toggle">Toggle Rotation</button>
+<button id = "ButtonT">Toggle Rotation</button>
 
 </body>
 </html>

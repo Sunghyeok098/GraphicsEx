@@ -15,6 +15,7 @@ var axis = 0;
 var theta = [ 0, 0, 0 ];
 
 var thetaLoc;
+
 var flag = true;
 
 window.onload = function init()
@@ -60,44 +61,39 @@ window.onload = function init()
     
     document.getElementById( "xButton" ).onclick = function () {
         axis = xAxis;
-		render();
     };
     document.getElementById( "yButton" ).onclick = function () {
         axis = yAxis;
-		render();
     };
     document.getElementById( "zButton" ).onclick = function () {
         axis = zAxis;
-		render();
     };
-    document.getElementById('toggle').onclick = function(){
-        flag = !flag;
-    };
+    document.getElementById("ButtonT").onclick = function(){flag = !flag;};
         
     render();
 }
 
 function colorCube()
 {
-    quad( 1, 0, 3, 2 ); // blue
-    quad( 2, 3, 7, 6 ); // yellow
-    quad( 3, 0, 4, 7 ); // green
-    quad( 6, 5, 1, 2 ); // cyan
-    quad( 4, 5, 6, 7 ); // red       
-    quad( 5, 4, 0, 1 ); // magenta
+    quad( 1, 0, 3, 2 );
+    quad( 2, 3, 7, 6 );
+    quad( 3, 0, 4, 7 );
+    quad( 6, 5, 1, 2 );
+    quad( 4, 5, 6, 7 );
+    quad( 5, 4, 0, 1 );
 }
 
 function quad(a, b, c, d) 
 {
     var vertices = [
-        vec4( -0.5, -0.5,  0.5, 1.0 ), // 0
-        vec4( -0.5,  0.5,  0.5, 1.0 ), // 1
-        vec4(  0.5,  0.5,  0.5, 1.0 ), // 2
-        vec4(  0.5, -0.5,  0.5, 1.0 ), // 3
-        vec4( -0.5, -0.5, -0.5, 1.0 ), // 4 
-        vec4( -0.5,  0.5, -0.5, 1.0 ), // 5
-        vec4(  0.5,  0.5, -0.5, 1.0 ), // 6
-        vec4(  0.5, -0.5, -0.5, 1.0 )  // 7
+        vec4( -0.5, -0.5,  0.5, 1.0 ),
+        vec4( -0.5,  0.5,  0.5, 1.0 ),
+        vec4(  0.5,  0.5,  0.5, 1.0 ),
+        vec4(  0.5, -0.5,  0.5, 1.0 ),
+        vec4( -0.5, -0.5, -0.5, 1.0 ),
+        vec4( -0.5,  0.5, -0.5, 1.0 ),
+        vec4(  0.5,  0.5, -0.5, 1.0 ),
+        vec4(  0.5, -0.5, -0.5, 1.0 )
     ];
 
     var vertexColors = [
@@ -117,9 +113,7 @@ function quad(a, b, c, d)
     
     //vertex color assigned by the index of the vertex
     
-    var indices = [ a, b, c, a, c, d ]; // 1 0 3, 1 3 2 // 4 5 6, 4 6 7 // ...
-
-	console.log(indices)
+    var indices = [ a, b, c, a, c, d ];
 
     for ( var i = 0; i < indices.length; ++i ) {
         points.push( vertices[indices[i]] );
@@ -135,13 +129,11 @@ function render()
 {
     gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    if(flag)
-        theta[axis] += 2.0;
-
+    if(flag) theta[axis] += 2.0;
     gl.uniform3fv(thetaLoc, theta);
 
     gl.drawArrays( gl.TRIANGLES, 0, NumVertices );
 
-    //requestAnimFrame( render );
+    requestAnimFrame( render );
 }
 

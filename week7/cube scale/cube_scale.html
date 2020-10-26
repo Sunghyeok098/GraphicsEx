@@ -9,7 +9,7 @@ varying vec4 fColor;
 uniform vec3 theta;
 uniform float time;
 
-void main()
+void main() 
 {
     // Compute the sines and cosines of theta for each of
     //   the three axes in one computation.
@@ -35,15 +35,15 @@ void main()
 		    0.0,  0.0, 0.0, 1.0 );
 
     fColor = vColor;
-    gl_Position = (1.0 - 0.5*sin(time)) * rz * ry * rx * vPosition;
+    gl_Position = (1.0+0.5*sin(time))*rz * ry * rx * vPosition;
     gl_Position.w = 1.0;
-}
+} 
 </script>
 
 <script id="fragment-shader" type="x-shader/x-fragment">
 
 precision mediump float;
-
+   
 varying vec4 fColor;
 
 void
@@ -62,17 +62,16 @@ main()
 
 
 
-
 <canvas id="gl-canvas" width="512"" height="512">
 Oops ... your browser doesn't support the HTML5 canvas element
 </canvas>
-
+   
 <br/>
 
 <button id= "xButton">Rotate X</button>
 <button id= "yButton">Rotate Y</button>
 <button id= "zButton">Rotate Z</button>
-<button id= "toggle">Toggle Rotation</button>
+<button id = "ButtonT">Toggle Rotation</button>
 
 </body>
 </html>
