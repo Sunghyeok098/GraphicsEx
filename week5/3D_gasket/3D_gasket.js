@@ -1,7 +1,7 @@
 var gl;
 var points = [];
 var colors = [];
-var NumTimesToSubdivide = 5;
+var NumTimesToSubdivide = 1;
 
 window.onload = function init() {
   var canvas = document.getElementById("gl-canvas");
@@ -92,8 +92,9 @@ function divideTetra(a, b, c, d, count){
     var ad = mix( a, d, 0.5 );
     var bc = mix( b, c, 0.5 );
     var bd = mix( b, d, 0.5 );
-    var cd = mix( c, d, 0.5 );
-    
+    var cd = mix( c, d, 0.5 ); 
+          
+                                   
     count--;
     // three new triangles
     divideTetra(a, ab, ac, ad, count);
