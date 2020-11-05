@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<style type='text/css'>
+    canvas{background: blue;}
+</style>
+<p>ID : 201534103 Name : 하성혁</p>
+<p></p>
+<button id = 'button1'> Increase R </button>
+<button id = 'button2'> Decrease R </button>
+
+<p></p>
+<button id = 'button3'> Increase theta </button>
+<button id = 'button4'> decrease theta </button>
+<button id = 'button5'> Increase phi </button>
+<button id = 'button6'> Dencrease phi </button>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+
+attribute  vec4 vPosition;
+attribute  vec4 vColor;
+varying vec4 fColor;
+
+uniform mat4 modelView;
+
+void main()
+{
+    gl_Position = modelView * vPosition;
+    fColor = vColor;
+}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+
+precision mediump float;
+
+varying vec4 fColor;
+
+void
+main()
+{
+    gl_FragColor = fColor;
+}
+</script>
+
+<script type="text/javascript" src="../../Common/webgl-utils.js"></script>
+<script type="text/javascript" src="../../Common/initShaders.js"></script>
+<script type="text/javascript" src="../../Common/MV.js"></script>
+<script type="text/javascript" src="../../Common/geometry.js"></script>
+<script type="text/javascript" src="lookat.js"></script>
+
+<body>
+
+<br>
+<canvas id="gl-canvas" width="512" height="512">
+Oops ... your browser doesn't support the HTML5 canvas element
+</canvas>
+
+<br/>
+
+</body>
+</html>
