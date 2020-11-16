@@ -27,9 +27,7 @@
         vec3 pos = (modelViewMatrix * vPosition).xyz;
     
         // vector from vertex position to light source
-    
-        vec3 L;
-    
+
         // check for directional light
     
         if(lightPosition.w == 0.0){
@@ -59,37 +57,38 @@
 
     precision mediump float;
 
-    uniform vec4 ambientProduct, diffuseProduct, specularProduct;
-    uniform float shininess;
-    
-    varying vec3 N,L,E;
-    
-    void
-    main()
-    {
-    
-        vec4 fColor;
-    
-        vec3 H=normalize(L+E);
-    
-        // Compute terms in the illumination equation
-        vec4 ambient = ambientProduct;
-    
-        float Cd = max(dot(L,N), 0.0);
-        vec4 diffuse = Cd*diffuseProduct;
-    
-        float Cs = pow(max(dot(N,H), 0.0), shininess);
-        vec4 specualr = Cs * specularProduct;
-    
-        if(dot(L,N) < 0.0){
-            specualr = vec4(0.0, 0.0, 0.0, 1.0);
-        }
-    
-        fColor=ambient + diffuse + specualr;
-    
-        gl_FragColor = fColor;
-    
+uniform vec4 ambientProduct, diffuseProduct, specularProduct;
+uniform float shininess;
+
+varying vec3 N,L,E;
+
+void
+main()
+{
+
+    vec4 fColor;
+
+    vec3 H=normalize(L+E);
+
+    // Compute terms in the illumination equation
+    vec4 ambient = ambientProduct;
+
+    float Cd = max(dot(L,N), 0.0);
+    vec4 diffuse = Cd*diffuseProduct;
+
+    float Cs = pow(max(dot(N,H), 0.0), shininess);
+    vec4 specualr = Cs * specularProduct;
+
+    if(dot(L,N) < 0.0){
+        specualr = vec4(0.0, 0.0, 0.0, 1.0);
     }
+
+    fColor=ambient + diffuse + specualr;
+
+    gl_FragColor = fColor;
+
+}
+
     
 
 </script>
