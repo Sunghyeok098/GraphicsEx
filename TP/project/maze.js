@@ -817,7 +817,7 @@ function detect_collision(shapes, obstacles){
           console.log(theta, halfAngle, Math.PI)
           if((theta + halfAngle) > Math.PI) theta -= Math.PI;
           
-          else if(-Math.PI / 8 <= theta && theta <= Math.PI / 8){
+          if(-Math.PI / 8 <= theta && theta <= Math.PI / 8){
             console.log(2)
             return true;
           }
